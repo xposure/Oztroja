@@ -1,0 +1,104 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/Windows
+/intermediateDir:obj/Windows
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Assets/Audio/scavengers_chop1.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_chop1.aif
+
+#begin Assets/Audio/scavengers_chop2.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_chop2.aif
+
+#begin Assets/Audio/scavengers_die.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_die.aif
+
+#begin Assets/Audio/scavengers_enemy1.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_enemy1.aif
+
+#begin Assets/Audio/scavengers_enemy2.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_enemy2.aif
+
+#begin Assets/Audio/scavengers_footstep1.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_footstep1.aif
+
+#begin Assets/Audio/scavengers_footstep2.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_footstep2.aif
+
+#begin Assets/Audio/scavengers_fruit1.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_fruit1.aif
+
+#begin Assets/Audio/scavengers_fruit2.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_fruit2.aif
+
+#begin Assets/Audio/scavengers_music.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_music.aif
+
+#begin Assets/Audio/scavengers_soda1.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_soda1.aif
+
+#begin Assets/Audio/scavengers_soda2.aif
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Assets/Audio/scavengers_soda2.aif
+
+#begin Assets/Sprites/Scavengers_SpriteSheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:Assets/Sprites/Scavengers_SpriteSheet.png
+
+#begin Assets/Fonts/PressStart2P.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/PressStart2P.spritefont
+
