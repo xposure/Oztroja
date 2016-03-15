@@ -8,24 +8,32 @@ namespace Oztroja.Entities
 {
     public class Wall
     {
-        public static Wall wall1 = new Wall(new Sprite(5, 2));
-        public static Wall wall2 = new Wall(new Sprite(6, 2));
-        public static Wall wall3 = new Wall(new Sprite(7, 2));
-        public static Wall wall4 = new Wall(new Sprite(0, 3));
-        public static Wall wall5 = new Wall(new Sprite(3, 3));
-        public static Wall wall6 = new Wall(new Sprite(5, 3));
-        public static Wall wall7 = new Wall(new Sprite(6, 3));
-        public static Wall wall8 = new Wall(new Sprite(7, 3));
-        private Sprite _sprite;
+        public static Wall createWall1(int x, int y) { return new Wall(x, y, new Sprite(5, 2), new Sprite(0, 6)); }
+        public static Wall createWall2(int x, int y) { return new Wall(x, y, new Sprite(6, 2), new Sprite(1, 6)); }
+        public static Wall createWall3(int x, int y) { return new Wall(x, y, new Sprite(7, 2), new Sprite(2, 6)); }
+        public static Wall createWall4(int x, int y) { return new Wall(x, y, new Sprite(0, 3), new Sprite(3, 6)); }
+        public static Wall createWall5(int x, int y) { return new Wall(x, y, new Sprite(3, 3), new Sprite(4, 6)); }
+        //public static Wall createWall6(int x, int y) { return new Wall(x, y, new Sprite(5, 3), new Sprite(5, 6)); }
+        public static Wall createWall7(int x, int y) { return new Wall(x, y, new Sprite(6, 3), new Sprite(5, 6)); }
+        public static Wall createWall8(int x, int y) { return new Wall(x, y, new Sprite(7, 3), new Sprite(6, 6)); }
 
-        public Wall(Sprite sprite)
+        private Sprite _sprite;
+        private Sprite _dmgSprite;
+
+        public bool IsDamaged = false;
+
+        public Wall(int x, int y, Sprite sprite, Sprite dmgSprite)
         {
             _sprite = sprite;
+            _dmgSprite = dmgSprite;
         }
 
         public void Draw(int x, int y)
         {
-            _sprite.Draw(x, y);
+            if (IsDamaged)
+                _dmgSprite.Draw(x, y);
+            else
+                _sprite.Draw(x, y);
         }
     }
 }

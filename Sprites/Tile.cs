@@ -26,8 +26,6 @@ namespace Oztroja.Sprites
             outerWall1 = new Tile(new Sprite(1, 3));
             outerWall2 = new Tile(new Sprite(2, 3));
             outerWall3 = new Tile(new Sprite(4, 3));
-
-
         }
 
         private Sprite _sprite;

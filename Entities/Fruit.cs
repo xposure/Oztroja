@@ -13,6 +13,7 @@ namespace Oztroja.Entities
         public override void Use(Player player)
         {
             player.Heal(10);
+            Sound.PlayRandom(Sound.fruit1, Sound.fruit2);
         }
     }
 }

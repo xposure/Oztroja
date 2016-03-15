@@ -14,6 +14,16 @@ namespace Oztroja
         public static void GenNextLevel()
         {
             var depth = current == null ? 1 : current.Depth;
+
+            if (current != null)
+            {
+                current._allMobs.Clear();
+                current._tiles = null;
+                current._mobs = null;
+                current._items = null;
+                current._walls = null;
+            }
+
             current = new Level(depth);
             current.Generate();
         }
@@ -24,16 +34,21 @@ namespace Oztroja
         private Item[,] _items;
         private Wall[,] _walls;
         private Mob[,] _mobs;
+        private List<Mob> _allMobs = new List<Mob>();
 
-        private int _depth;
+        private int _depth, _turn;
 
         public int Depth { get { return _depth; } }
+        public int Width { get { return _width; } }
+        public int Height { get { return _height; } }
 
         private Level(int depth)
         {
             _depth = depth;
-            _random = new Random((int)((depth * 2654435761) % (2 ^ 32)));
+            _random = new Random((int)((depth * 2654435761)));
 
+            //System.Diagnostics.Debug.WriteLine(r);
+            
         }
 
         private bool CanPlace(int x, int y)
@@ -41,7 +56,7 @@ namespace Oztroja
             if (x == 1 && y == 1)
                 return false;
 
-            if (x == _width - 1 && y == _height - 1)
+            if (x == _width - 2 && y == _height - 2)
                 return false;
 
             if (x == 0 || x == _width - 1 || y == 0 || y == _height - 1)
@@ -61,12 +76,15 @@ namespace Oztroja
 
         private void Generate()
         {
-            _width = 8;
-            _height = 8;
+            _depth++;
+            _width = 10;
+            _height = 10;
             _tiles = new Tile[_width, _height];
             _items = new Item[_width, _height];
             _mobs = new Mob[_width, _height];
             _walls = new Wall[_width, _height];
+
+            _allMobs.Add(Game1.player);
 
             for (var x = 0; x < _width; x++)
             {
@@ -104,15 +122,100 @@ namespace Oztroja
 
                 if (CanPlace(x, y))
                 {
-                    _walls[x, y] = _random.Choose(Wall.wall1, Wall.wall2, Wall.wall3, Wall.wall4, Wall.wall5, Wall.wall6, Wall.wall7, Wall.wall8);
+                    _walls[x, y] = _random.Choose<Func<int, int, Wall>>(Wall.createWall1, Wall.createWall2, Wall.createWall3, Wall.createWall4, Wall.createWall5, Wall.createWall7, Wall.createWall8)(x, y);
                     walls--;
                 }
             }
+
+            var enemies = (int)Math.Log(_depth, 2f);
+            while (enemies > 0)
+            {
+                var x = _random.Next(1, _width - 1);
+                var y = _random.Next(1, _height - 1);
+
+                if (CanPlace(x, y))
+                {
+                    _mobs[x, y] = _random.Choose<Func<int, int, Mob>>(Enemy.creatEnemy1, Enemy.creatEnemy2)(x, y);
+                    _allMobs.Add(_mobs[x, y]);
+
+                    enemies--;
+                }
+            }
+
+            _mobs[1, 1] = Game1.player;
+            _tiles[_width - 2, _height - 2] = Tile.exit;
+            Game1.player.SetPosition(1, 1);
+        }
+
+        public void SetItem(int x, int y, Item val)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return;
+
+            _items[x, y] = val;
+        }
+
+        public Item GetItem(int x, int y)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return null;
+
+            return _items[x, y];
+        }
+
+        public void SetMob(int x, int y, Mob val)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return;
+
+            _mobs[x, y] = val;
+        }
+
+        public Mob GetMob(int x, int y)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return null;
+
+            return _mobs[x, y];
+        }
+
+        public Wall GetWall(int x, int y)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return null;
+
+            return _walls[x, y];
+        }
+
+        public void SetWall(int x, int y, Wall val)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return;
+
+            _walls[x, y] = val;
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            if (x < 0 || x >= _width || y < 0 || y >= _height)
+                return null;
+
+            return _tiles[x, y];
         }
 
         public void Update(float dt)
         {
+            for (var x = 0; x < _width; x++)
+            {
+                for (var y = 0; y < _height; y++)
+                {
+                    if (_mobs[x, y] != null) _mobs[x, y].Update(dt);
+                }
+            }
 
+            var mob = _allMobs[_turn % _allMobs.Count];
+            if (!mob.IsAlive || mob.Turn(dt))
+                _turn++;
         }
 
         public void Draw()
@@ -122,10 +225,12 @@ namespace Oztroja
                 for (var y = 0; y < current._height; y++)
                 {
                     _tiles[x, y].Draw(x * 32, y * 32);
-                    if (_items[x, y] != null)
-                        _items[x, y].Draw(x * 32, y * 32);
-                    else if (_walls[x, y] != null)
+                    if (_walls[x, y] != null)
                         _walls[x, y].Draw(x * 32, y * 32);
+                    else if (_mobs[x, y] != null)
+                        _mobs[x, y].Draw(x * 32, y * 32);
+                    else if (_items[x, y] != null)
+                        _items[x, y].Draw(x * 32, y * 32);
                 }
             }
         }

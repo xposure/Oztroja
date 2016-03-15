@@ -2,6 +2,13 @@
 
 namespace Oztroja
 {
+    /*
+        - Move animations
+        - Screen for text
+        - Screen tansitions
+        - Death and reset
+    */
+
 #if WINDOWS || LINUX
     /// <summary>
     /// The main class.
