@@ -23,7 +23,7 @@ namespace Oztroja
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 800;
-            graphics.PreferredBackBufferHeight = 600;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
         }
@@ -50,7 +50,7 @@ namespace Oztroja
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            target = new RenderTarget2D(GraphicsDevice, 256, 256);
+            target = new RenderTarget2D(GraphicsDevice, 320, 320);
 
             Sound.Initialize(Content);
             SpriteSheet.Initialize(spriteBatch, Content);

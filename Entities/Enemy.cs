@@ -12,6 +12,7 @@ namespace Oztroja.Entities
         public static Enemy creatEnemy2(int x, int y) { return new Enemy(x, y, new Animator(Animation.enemyIdle2, Animation.enemyAttack2)); }
 
         private static Random _random = new Random();
+        private bool _skipTurn = false;
 
         public Enemy(int x, int y, Animator animator) : base(x, y, animator)
         {
@@ -20,6 +21,10 @@ namespace Oztroja.Entities
 
         public override bool Turn(float dt)
         {
+            _skipTurn = !_skipTurn;
+            if (_skipTurn)
+                return true;
+
             var action = _random.Next(0, 5);
 
             switch (action)
