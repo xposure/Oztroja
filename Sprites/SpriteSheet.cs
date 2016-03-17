@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +22,8 @@ namespace Oztroja.Sprites
         private int _cols, _rows;
         private int _colWidth, _rowHeight;
 
+        public Texture2D Texture { get { return _texture; } }
+
         public SpriteSheet(SpriteBatch batch, Texture2D texture, int cols, int rows)
         {
             _batch = batch;
@@ -34,14 +35,14 @@ namespace Oztroja.Sprites
             _rowHeight = texture.Height / rows;
         }
 
-        public void Draw(int x, int y, int col, int row)
+        public void Draw(Screen screen, int x, int y, int col, int row)
         {
             var pos = new Vector2(x, y);
             var srcx = _colWidth * col;
             var srcy = _rowHeight * row;
             var srcRect = new Rectangle(srcx, srcy, _colWidth, _rowHeight);
 
-            _batch.Draw(_texture, position: pos, sourceRectangle: srcRect);
+            screen.Batch.Draw(_texture, position: pos, sourceRectangle: srcRect);
         }
     }
 }

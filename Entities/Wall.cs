@@ -28,12 +28,12 @@ namespace Oztroja.Entities
             _dmgSprite = dmgSprite;
         }
 
-        public void Draw(int x, int y)
+        public void Draw(Screen screen, int x, int y)
         {
             if (IsDamaged)
-                _dmgSprite.Draw(x, y);
+                _dmgSprite.Draw(screen, x, y);
             else
-                _sprite.Draw(x, y);
+                _sprite.Draw(screen, x, y);
         }
     }
 }

@@ -100,10 +100,10 @@ namespace Oztroja.Sprites
             }
         }
 
-        public void Draw(int x, int y)
+        public void Draw(Screen screen, int x, int y)
         {
             var sprite = _sprites[_frame % _sprites.Count];
-            sprite.Draw(x, y);
+            sprite.Draw(screen, x, y);
         }
     }
 }

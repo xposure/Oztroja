@@ -11,15 +11,13 @@ namespace Oztroja
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameWindow : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         RenderTarget2D target;
 
-        public static Player player;
-
-        public Game1()
+        public GameWindow()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 800;
@@ -57,7 +55,7 @@ namespace Oztroja
             Tile.Initialize();
             Animation.Initialize();
 
-            player = new Player(1, 1);
+            GameManager.Setup(this);           
 
             Level.GenNextLevel();
 
@@ -70,6 +68,7 @@ namespace Oztroja
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            GameManager.Teardown();
         }
 
         /// <summary>
@@ -85,8 +84,7 @@ namespace Oztroja
             if (Sound.music.State == SoundState.Stopped)
                 Sound.music.Play();
 
-            var dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Level.current.Update(dt);
+            GameManager.Instance.Tick();
 
             base.Update(gameTime);
         }
@@ -100,9 +98,7 @@ namespace Oztroja
             this.GraphicsDevice.SetRenderTarget(target);
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
-            Level.current.Draw();
-            spriteBatch.End();
+            GameManager.Instance.Render();
 
             this.GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(Color.Black);

@@ -38,9 +38,9 @@ namespace Oztroja.Entities
             return true;
         }
 
-        public virtual void Draw(int x, int y)
+        public virtual void Draw(Screen screen, int x, int y)
         {
-            _animator.Draw(x, y);
+            _animator.Draw(screen, x, y);
         }
 
         public virtual void Hurt(int amt)

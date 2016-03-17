@@ -27,9 +27,9 @@ namespace Oztroja.Sprites
             }
         }
 
-        public void Draw(int x, int y)
+        public void Draw(Screen screen, int x, int y)
         {
-            _animations[_curAnimation].Draw(x, y);
+            _animations[_curAnimation].Draw(screen, x, y);
         }
 
         public void Set(string name)

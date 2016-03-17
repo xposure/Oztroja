@@ -84,7 +84,7 @@ namespace Oztroja
             _mobs = new Mob[_width, _height];
             _walls = new Wall[_width, _height];
 
-            _allMobs.Add(Game1.player);
+            _allMobs.Add(GameManager.Instance.Player);
 
             for (var x = 0; x < _width; x++)
             {
@@ -142,9 +142,9 @@ namespace Oztroja
                 }
             }
 
-            _mobs[1, 1] = Game1.player;
+            _mobs[1, 1] = GameManager.Instance.Player;
             _tiles[_width - 2, _height - 2] = Tile.exit;
-            Game1.player.SetPosition(1, 1);
+            GameManager.Instance.Player.SetPosition(1, 1);
         }
 
         public void SetItem(int x, int y, Item val)
@@ -218,19 +218,19 @@ namespace Oztroja
                 _turn++;
         }
 
-        public void Draw()
+        public void Draw(Screen screen)
         {
             for (var x = 0; x < current._width; x++)
             {
                 for (var y = 0; y < current._height; y++)
                 {
-                    _tiles[x, y].Draw(x * 32, y * 32);
+                    _tiles[x, y].Draw(screen, x * 32, y * 32);
                     if (_walls[x, y] != null)
-                        _walls[x, y].Draw(x * 32, y * 32);
+                        _walls[x, y].Draw(screen, x * 32, y * 32);
                     else if (_mobs[x, y] != null)
-                        _mobs[x, y].Draw(x * 32, y * 32);
+                        _mobs[x, y].Draw(screen, x * 32, y * 32);
                     else if (_items[x, y] != null)
-                        _items[x, y].Draw(x * 32, y * 32);
+                        _items[x, y].Draw(screen, x * 32, y * 32);
                 }
             }
         }

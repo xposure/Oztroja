@@ -23,9 +23,9 @@ namespace Oztroja.Entities
             _sprite = sprite;
         }
 
-        public void Draw(int x, int y)
+        public void Draw(Screen screen, int x, int y)
         {
-            _sprite.Draw(x, y);
+            _sprite.Draw(screen, x, y);
         }
 
         public virtual void Use(Player player)

@@ -15,9 +15,9 @@ namespace Oztroja.Sprites
             _row = row;
         }
 
-        public void Draw(int x, int y)
+        public void Draw(Screen screen, int x, int y)
         {
-            SpriteSheet.spriteSheet.Draw(x, y, _col, _row);
+            SpriteSheet.spriteSheet.Draw(screen, x, y, _col, _row);
         }
     }
 }
